@@ -65,6 +65,11 @@ tar -xvf enum4linux-0.8.9.tar.gz
 rm enum4linux-0.8.9.tar.gz
 cd $mydirectory
 
+echo "[!] Install network tools"
+cd $mydirectory/network/
+git clone https://github.com/SpiderLabs/Responder.git
+cd $mydirectory
+
 echo "[!] Install reconnaissance tools"
 cd $mydirectory/recon
 git clone https://github.com/laramies/theHarvester.git
@@ -75,6 +80,7 @@ cd $mydirectory/escalation
 git clone https://github.com/mattifestation/PowerSploit.git
 git clone https://github.com/PowerShellEmpire/PowerTools.git
 git clone https://github.com/Kevin-Robertson/Inveigh.git
+git clone https://github.com/samratashok/nishang.git
 mkdir -p $mydirectory/escalation/wcedigest
 cd $mydirectory/escalation/wcedigest
 wget -nc http://www.ampliasecurity.com/research/wce_v1_42beta_x32.zip
