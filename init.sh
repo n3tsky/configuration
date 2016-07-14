@@ -132,6 +132,7 @@ git clone https://github.com/wpscanteam/wpscan.git
 git clone https://github.com/vs4vijay/heartbleed.git
 git clone https://github.com/sullo/nikto.git
 git clone https://github.com/WebBreacher/tilde_enum.git
+git clone https://github.com/xmendez/wfuzz
 wget -nc "http://downloads.sourceforge.net/project/dirbuster/DirBuster%20%28jar%20%2B%20lists%29/1.0-RC1/DirBuster-1.0-RC1.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fdirbuster%2Ffiles%2FDirBuster%2520%2528jar%2520%252B%2520lists%2529%2F1.0-RC1%2F&ts=1443459199&use_mirror=iweb" -O DirBuster-1.0-RC1.tar.bz2
 bunzip2 DirBuster-1.0-RC1.tar.bz2
 tar -xvf DirBuster-1.0-RC1.tar
