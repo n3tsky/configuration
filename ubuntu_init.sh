@@ -105,8 +105,13 @@ apt-get install -y python-distorm3
 git clone https://github.com/volatilityfoundation/volatility.git
 cd $mydirectory
 
-echo "[!] Install John"
+echo "[!] Install passord cracking tools"
 cd $mydirectory/pwcracking/
+mkdir -p mkdir -p $mydirectory/pwcracking/cewl
+cd $mydirectory/pwcracking/cewl
+wget -nc "https://digi.ninja/files/cewl_5.1.tar.bz2"
+cd $mydirectory/pwcracking/
+git clone https://github.com/Mebus/cupp.git
 mkdir -p $mydirectory/pwcracking/jtr-jumbo
 cd $mydirectory/pwcracking/jtr-jumbo
 wget -nc http://www.openwall.com/john/j/john-1.8.0-jumbo-1.tar.gz
