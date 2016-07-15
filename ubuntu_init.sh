@@ -8,35 +8,35 @@ mkdir -p $mydirectory
 cd $mydirectory
 
 echo "[!] System updates"
-apt-get update -y
-apt-get upgrade -y
-apt-get dist-upgrade -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
 
 echo "[!] Remove default useless apps..."
-apt-get remove -y --purge rhythmbox ekiga totem ubuntu-one unity-lens-music unity-lens-photos unity-lens-video transmission transmission-gtk thunderbird apport
+sudo apt-get remove -y --purge rhythmbox ekiga totem ubuntu-one unity-lens-music unity-lens-photos unity-lens-video transmission transmission-gtk thunderbird apport
 
 echo "[!] Remove of search tools provided by unity."
 gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
 gsettings set com.canonical.Unity.Lenses remote-content-search none
 
 echo "[!] Disable guest user and remote logon"
-sh -c 'printf "[SeatDefaults]\ngreeter-show-remote-login=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-remote-login.conf'
-sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
+sudo sh -c 'printf "[SeatDefaults]\ngreeter-show-remote-login=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-remote-login.conf'
+sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
 
 echo "[!] Install hacking tools and other tools"
-apt-get install -y aptitude nmap nbtscan wireshark-qt tshark dsniff tcpdump openjdk-8-jre libssl-dev libmysqlclient-dev libjpeg-dev libnetfilter-queue-dev ettercap-text-only pidgin pidgin-otr traceroute lft gparted autopsy gnupg htop ssh libpcap0.8-dev libimage-exiftool-perl p7zip p7zip-full proxychains curl terminator hydra hydra-gtk medusa libtool rdesktop bzip2 rpcbind gimp steghide whois aircrack-ng cmake gdb stunnel hping3 vncviewer scalpel foremost unrar rar secure-delete
+sudo apt-get install -y aptitude vim nbtscan wireshark-qt tshark dsniff tcpdump openjdk-8-jre libssl-dev libmysqlclient-dev libjpeg-dev libnetfilter-queue-dev ettercap-text-only pidgin pidgin-otr traceroute lft gparted autopsy gnupg htop ssh libpcap0.8-dev libimage-exiftool-perl p7zip p7zip-full proxychains curl terminator hydra hydra-gtk medusa libtool rdesktop bzip2 rpcbind gimp steghide whois aircrack-ng cmake gdb stunnel hping3 vncviewer scalpel foremost unrar rar secure-delete libpq-dev
 
 echo "[!] Install ruby and dependances"
-apt-get install -y ruby ruby-dev bundler
+sudo apt-get install -y ruby ruby-dev bundler
 
 echo "[!] Install python and requirements"
-apt-get install -y php7.0-cli php7.0-curl python-pil python-pycurl python-magic python-requests python-openssl python-pypcap python-crypto python-cryptography python-dev python-scapy python-urllib3
+sudo apt-get install -y php7.0-cli php7.0-curl python-pil python-pycurl python-magic python-requests python-openssl python-pypcap python-crypto python-cryptography python-dev python-scapy python-urllib3 python-distorm3
 
 echo "[!] Install dev libs"
-apt-get install -y libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev libssh-dev libsqlite-dev libsqlite3-dev libpcap-dev libcurl4-openssl-dev
+sudo apt-get install -y libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev libssh-dev libsqlite-dev libsqlite3-dev libpcap-dev libcurl4-openssl-dev
 
 echo "[!] Install some other tools"
-apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl
+sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl
 
 echo "[!] Create tools directory (and subdirectories)"
 cd $mydirectory/
@@ -68,6 +68,14 @@ cd $mydirectory
 echo "[!] Install network tools"
 cd $mydirectory/network/
 git clone https://github.com/SpiderLabs/Responder.git
+mkdir -p $mydirectory/network/nmap
+cd $mydirectory/network/nmap
+wget -nc https://nmap.org/dist/nmap-7.12.tar.bz2
+bzip2 -d nmap-7.12.tar.bz2
+tar -xvf nmap-7.12.tar
+rm nmap-7.12.tar
+cd nmap-7.12/src/
+./configure && make && sudo make install
 cd $mydirectory
 
 echo "[!] Install reconnaissance tools"
@@ -81,12 +89,13 @@ git clone https://github.com/mattifestation/PowerSploit.git
 git clone https://github.com/PowerShellEmpire/PowerTools.git
 git clone https://github.com/Kevin-Robertson/Inveigh.git
 git clone https://github.com/samratashok/nishang.git
-mkdir -p $mydirectory/escalation/wcedigest
+mkdir -p $mydirectory/escalation/wcedigest/x86
+mkdir -p $mydirectory/escalation/wcedigest/x64
 cd $mydirectory/escalation/wcedigest
 wget -nc http://www.ampliasecurity.com/research/wce_v1_42beta_x32.zip
 wget -nc http://www.ampliasecurity.com/research/wce_v1_42beta_x64.zip
-unzip wce_v1_42beta_x32.zip
-unzip wce_v1_42beta_x64.zip
+unzip wce_v1_42beta_x32.zip -d x86
+unzip wce_v1_42beta_x64.zip -d x64
 rm wce_v1_42beta_x32.zip
 rm wce_v1_42beta_x64.zip
 cd $mydirectory
@@ -101,7 +110,6 @@ cd $mydirectory
 
 echo "[!] Install volatility framework"
 cd $mydirectory/forensics
-apt-get install -y python-distorm3
 git clone https://github.com/volatilityfoundation/volatility.git
 cd $mydirectory
 
@@ -112,16 +120,9 @@ cd $mydirectory/pwcracking/cewl
 wget -nc "https://digi.ninja/files/cewl_5.1.tar.bz2"
 cd $mydirectory/pwcracking/
 git clone https://github.com/Mebus/cupp.git
-mkdir -p $mydirectory/pwcracking/jtr-jumbo
-cd $mydirectory/pwcracking/jtr-jumbo
-wget -nc http://www.openwall.com/john/j/john-1.8.0-jumbo-1.tar.gz
-gunzip john-1.8.0-jumbo-1.tar.gz
-tar -xvf john-1.8.0-jumbo-1.tar
-cd john-1.8.0-jumbo-1/src
-make linux-x86-64-native
-cd ../..
-rm john-1.8.0-jumbo-1.tar
-rm john-1.8.0-jumbo-1.tar.gz
+git clone https://github.com/magnumripper/JohnTheRipper.git
+cd JohnTheRipper/src
+./configure && make -s clean && make -sj4
 cd $mydirectory
 
 echo "[!] Install exploit related tools"
@@ -158,10 +159,10 @@ git clone https://github.com/trustedsec/unicorn
 cd $mydirectory
 
 echo "[!] Install gems"
-gem install snmp
-gem install pcaprub
-gem install rake
-gem install bettercap
+sudo gem install snmp
+sudo gem install pcaprub
+sudo gem install rake
+sudo gem install bettercap
 
 echo "[!] Gather the metasploit repository"
 cd $mydirectory/exploits
@@ -170,12 +171,11 @@ cd $mydirectory/exploits/metasploit-framework
 bundle install
 cd $mydirectory
 
-
 echo "[!] Fix user rights"
 chown -R $myname:$myname $mydirectory
 
 echo "[!] Clean packages downloaded"
-aptitude autoclean -y
-apt-get autoremove --purge
+sudo aptitude autoclean -y
+sudo apt-get autoremove --purge
 
 echo "### Done ###"
