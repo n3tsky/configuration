@@ -3,7 +3,7 @@
 read -p "[!] Username: " myname
 clear
 
-mydirectory="/home/$myname/tools/"
+mydirectory="/home/$myname/Tools/"
 mkdir -p $mydirectory
 cd $mydirectory
 
