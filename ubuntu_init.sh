@@ -24,19 +24,19 @@ sudo sh -c 'printf "[SeatDefaults]\ngreeter-show-remote-login=false\n" >/usr/sha
 sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
 
 echo "[!] Install hacking tools and other tools"
-sudo apt-get install -y aptitude vim nbtscan wireshark-qt tshark dsniff tcpdump openjdk-8-jre libssl-dev libmysqlclient-dev libjpeg-dev libnetfilter-queue-dev ettercap-text-only pidgin pidgin-otr traceroute lft gparted autopsy gnupg htop ssh libpcap0.8-dev libimage-exiftool-perl p7zip p7zip-full proxychains curl terminator hydra hydra-gtk medusa libtool rdesktop bzip2 rpcbind gimp steghide whois aircrack-ng cmake gdb stunnel hping3 vncviewer scalpel foremost unrar rar secure-delete libpq-dev
+sudo apt-get install -y aptitude vim nbtscan wireshark-qt tshark dsniff tcpdump openjdk-8-jre libssl-dev libmysqlclient-dev libjpeg-dev libnetfilter-queue-dev ettercap-text-only pidgin pidgin-otr traceroute lft gparted autopsy gnupg htop ssh libpcap0.8-dev libimage-exiftool-perl p7zip p7zip-full proxychains curl terminator hydra hydra-gtk medusa libtool rdesktop bzip2 rpcbind gimp steghide whois aircrack-ng cmake gdb stunnel hping3 vncviewer scalpel foremost unrar rar secure-delete libpq-dev samba smbclient
 
 echo "[!] Install ruby and dependances"
 sudo apt-get install -y ruby ruby-dev bundler
 
 echo "[!] Install python and requirements"
-sudo apt-get install -y php7.0-cli php7.0-curl python-pil python-pycurl python-magic python-requests python-openssl python-pypcap python-crypto python-cryptography python-dev python-scapy python-urllib3 python-distorm3
+sudo apt-get install -y php7.0-cli php7.0-curl python-pil python-pycurl python-magic python-requests python-openssl python-pypcap python-crypto python-cryptography python-dev python-scapy python-urllib3 python-distorm3 python-impacket python-pcapy
 
 echo "[!] Install dev libs"
 sudo apt-get install -y libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev libssh-dev libsqlite-dev libsqlite3-dev libpcap-dev libcurl4-openssl-dev
 
 echo "[!] Install some other tools"
-sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl
+sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl keepassx
 
 echo "[!] Create tools directory (and subdirectories)"
 cd $mydirectory/
@@ -60,9 +60,16 @@ mkdir -p $mydirectory/forensics
 echo "[!] Install enum4linux"
 mkdir -p $mydirectory/network/enum4linux
 cd $mydirectory/network/enum4linux
-wget https://labs.portcullis.co.uk/download/enum4linux-0.8.9.tar.gz
+wget -nc "https://labs.portcullis.co.uk/download/enum4linux-0.8.9.tar.gz"
 tar -xvf enum4linux-0.8.9.tar.gz
 rm enum4linux-0.8.9.tar.gz
+cd enum4linux-0.8.9
+wget -nc "https://labs.portcullis.co.uk/download/polenum-0.2.tar.bz2"
+bzip2 -d polenum-0.2.tar.bz2
+tar -xvf polenum-0.2.tar
+mv polenum-0.2/polenum.py .
+rm polenum-0.2.tar
+rm -rf polenum-0.2
 cd $mydirectory
 
 echo "[!] Install network tools"
@@ -74,7 +81,7 @@ wget -nc https://nmap.org/dist/nmap-7.12.tar.bz2
 bzip2 -d nmap-7.12.tar.bz2
 tar -xvf nmap-7.12.tar
 rm nmap-7.12.tar
-cd nmap-7.12/src/
+cd nmap-7.12
 ./configure && make && sudo make install
 cd $mydirectory
 
@@ -135,7 +142,7 @@ echo "[!] Install database tools"
 cd $mydirectory/database
 git clone https://github.com/sqlmapproject/sqlmap.git
 wget -nc "https://www.dbvis.com/product_download/dbvis-9.5/media/dbvis_linux_9_5.deb"
-dpkg -i dbvis_linux_9_5.deb
+sudo dpkg -i dbvis_linux_9_5.deb
 rm dbvis_linux_9_5.deb
 cd $mydirectory
 
