@@ -101,6 +101,7 @@ cd $mydirectory
 
 echo "[!] Install volatility framework"
 cd $mydirectory/forensics
+apt-get install -y python-distorm3
 git clone https://github.com/volatilityfoundation/volatility.git
 cd $mydirectory
 
