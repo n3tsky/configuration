@@ -19,10 +19,6 @@ echo "[!] Remove of search tools provided by unity."
 gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"
 gsettings set com.canonical.Unity.Lenses remote-content-search none
 
-echo "[!] Disable guest user and remote logon"
-sudo sh -c 'printf "[SeatDefaults]\ngreeter-show-remote-login=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-remote-login.conf'
-sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
-
 echo "[!] Install hacking tools and other tools"
 sudo apt-get install -y aptitude vim nbtscan wireshark-qt tshark dsniff tcpdump openjdk-8-jre libssl-dev libmysqlclient-dev libjpeg-dev libnetfilter-queue-dev ettercap-text-only pidgin pidgin-otr traceroute lft gparted autopsy gnupg htop ssh libpcap0.8-dev libimage-exiftool-perl p7zip p7zip-full proxychains curl terminator hydra hydra-gtk medusa libtool rdesktop bzip2 rpcbind gimp steghide whois aircrack-ng cmake gdb stunnel hping3 vncviewer scalpel foremost unrar rar secure-delete libpq-dev samba smbclient
 
