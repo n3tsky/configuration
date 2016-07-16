@@ -34,6 +34,9 @@ sudo apt-get install -y libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libyaml-d
 echo "[!] Install some other tools"
 sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl keepassx iptables iptables-persistent dunst
 
+echo "[!] Graphical utilities"
+sudo xserver-xorg xserver-xorg-core xfonts-base xinit x11-xserver-utils i3 lightdm lightdm-gtk-greeter tango-icon-theme numix-gtk-theme fonts-cantarell
+
 echo "[!] Create tools directory (and subdirectories)"
 cd $mydirectory/
 mkdir -p $mydirectory/cheatsheets
