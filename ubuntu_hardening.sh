@@ -62,9 +62,9 @@ read -p "   Username for shadow user: " myshadowuser
 useradd -d /home/$myshadowuser -s /bin/bash -m $myshadowuser
 usermod -a -G sudo $myshadowuser
 passwd $myshadowuser
-groupadd admin
-usermod -a -G admin $mycurrentuser
-dpkg-statoverride --update --add root admin 4750 /bin/su
+groupadd psu
+usermod -a -G psu $mycurrentuser
+dpkg-statoverride --update --add root psu 4750 /bin/su
 #sudo passwd -l root
 
 echo "[!] Disable ctrl+alt+del on ttys"
