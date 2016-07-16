@@ -144,16 +144,43 @@ bindsym $mod+Shift+e mode "$mode_system"
 # finds out, if available)
 bar {
         position top
-	status_command i3status
+	#status_command i3status
+	# please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+	#tray_output primary
+	#tray_output eDP1
 	tray_output primary
-	font pango: Ubuntu Mono 9 
+	# font
+	font pango:Cantarell,Icons 10
 
 	status_command i3status -c ~/.i3/i3status.conf
+	#colors {
+	#	background #232323
+	#	statusline #DCDCDC
+	#}
+	
+	# Colors
 	colors {
-		background #232323
-		statusline #DCDCDC
-	} 
+                background #2B2C2B
+                statusline #F9FAF9
+                separator  #454947
+		
+		#                  border  backgr. text
+                focused_workspace  #F9FAF9 #16A085 #2B2C2B
+                active_workspace   #595B5B #353836 #FDF6E3
+                inactive_workspace #595B5B #353836 #EEE8D5
+                urgent_workspace   #16A085 #FDF6E3 #E5201D
+        }
 }
+
+# Theme colors
+# class                 border  backgr. text    indic.  child_border
+client.focused          #808280 #808280 #80FFF9 #FDF6E3
+client.focused_inactive #434745 #434745 #16A085 #454948
+client.unfocused        #434745 #434745 #16A085 #454948
+client.urgent           #CB4B16 #FDF6E3 #16A085 #268BD2
+client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+client.background       #2B2C2B
+
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run -i -p 'Menu' -fn 'Ubuntu Mono-28'
@@ -177,8 +204,6 @@ bindsym $mod+Ctrl+p exec pidgin
 bindsym $mod+Ctrl+c exec truecrypt 
 bindsym $mod+Ctrl+k exec /usr/local/bin/keepassx
 bindsym $mod+Ctrl+r exec xterm -e ranger 
-
-#set $Locker i3lock -c 000000 && sleep 1 
 
 # take screenshot
 bindsym $mod+Ctrl+s exec sleep 1 && xfce4-screenshooter -r
