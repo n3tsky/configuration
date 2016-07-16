@@ -51,3 +51,7 @@ sudo groupadd admin
 sudo usermod -a -G admin $mycurrentuser
 sudo dpkg-statoverride --update --add root admin 4750 /bin/su
 #sudo passwd -l root
+
+echo "[!] Disable ctrl+alt+del on ttys"
+sudo systemctl mask ctrl-alt-del.target
+sudo systemctl daemon-reload
