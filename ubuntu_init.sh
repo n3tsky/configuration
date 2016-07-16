@@ -32,7 +32,7 @@ echo "[!] Install dev libs"
 sudo apt-get install -y libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev libssh-dev libsqlite-dev libsqlite3-dev libpcap-dev libcurl4-openssl-dev
 
 echo "[!] Install some other tools"
-sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl keepassx iptables iptables-persistent
+sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl keepassx iptables iptables-persistent dunst
 
 echo "[!] Create tools directory (and subdirectories)"
 cd $mydirectory/
