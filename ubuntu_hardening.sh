@@ -27,6 +27,16 @@ echo "[!] Disable IPv6"
 sudo echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
 sudo echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
 sudo echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+
+sudo sysctl kernel.randomize_va_space=1
+# Enable IP spoofing protection
+sudo sysctl net.ipv4.conf.all.rp_filter=1
+# Disables the magic-sysrq key
+sudo sysctl kernel.sysrq=0
+# Turn off the tcp_timestamps
+sudo sysctl net.ipv4.tcp_timestamps=0
+# Enable TCP SYN Cookie Protection
+sudo sysctl net.ipv4.tcp_syncookies=1
 sudo sysctl -p
 #cat /proc/sys/net/ipv6/conf/all/disable_ipv6
 
@@ -55,3 +65,7 @@ sudo dpkg-statoverride --update --add root admin 4750 /bin/su
 echo "[!] Disable ctrl+alt+del on ttys"
 sudo systemctl mask ctrl-alt-del.target
 sudo systemctl daemon-reload
+
+echo "[!] Remove crash reporter"
+sudo apt-get remove --purge -y whoopsie
+sudo update-rc.d avahi-daemon disable
