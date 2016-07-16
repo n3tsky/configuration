@@ -9,6 +9,12 @@ echo "[!] Disable guest user and remote logon"
 sh -c 'printf "[SeatDefaults]\ngreeter-show-remote-login=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-remote-login.conf'
 sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
 
+echo "[!] LightDM greeter privacy settings"
+echo "[SeatDefaults]" >> /etc/lightdm/lightdm.conf.d/50-privacy.conf
+echo "greeter-hide-users=true" >> /etc/lightdm/lightdm.conf.d/50-privacy.conf
+echo "greeter-show-manual-login=true" >> /etc/lightdm/lightdm.conf.d/50-privacy.conf
+echo "allow-guest=false" >> /etc/lightdm/lightdm.conf.d/50-privacy.conf
+
 echo "[!] Hardening TCP/IP stack"
 echo "net.ipv4.icmp_echo_ignore_broadcasts = 1" >> /etc/sysctl.conf
 echo "net.ipv4.conf.all.accept_source_route = 0" >> /etc/sysctl.conf
