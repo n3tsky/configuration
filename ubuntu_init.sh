@@ -32,7 +32,7 @@ echo "[!] Install dev libs"
 sudo apt-get install -y libssl-dev zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev libssh-dev libsqlite-dev libsqlite3-dev libpcap-dev libcurl4-openssl-dev
 
 echo "[!] Install some other tools"
-sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 curl keepassx iptables iptables-persistent dunst
+sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 keepassx iptables iptables-persistent dunst iptables iptables-persistent alsa-utils xautolock imagemagick scrot network-manager-gnome nemo libnotify-bin volumeicon-alsa redshift-gtk
 
 echo "[!] Graphical utilities"
 sudo xserver-xorg xserver-xorg-core xfonts-base xinit x11-xserver-utils i3 lightdm lightdm-gtk-greeter tango-icon-theme numix-gtk-theme fonts-cantarell
