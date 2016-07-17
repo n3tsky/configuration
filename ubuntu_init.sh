@@ -35,7 +35,7 @@ echo "[!] Install some other tools"
 sudo apt-get install -y git git-core qemu-kvm qemu-utils binwalk qemu-system* build-essential autoconf postgresql pgadmin3 keepassx iptables iptables-persistent dunst iptables iptables-persistent alsa-utils xautolock imagemagick scrot network-manager-gnome nemo libnotify-bin volumeicon-alsa redshift-gtk
 
 echo "[!] Graphical utilities"
-sudo apt-get install -y xserver-xorg xserver-xorg-core xfonts-base xinit x11-xserver-utils i3 lightdm lightdm-gtk-greeter tango-icon-theme numix-gtk-theme fonts-cantarell
+sudo apt-get install -y xserver-xorg xserver-xorg-core xfonts-base xinit x11-xserver-utils i3 lightdm lightdm-gtk-greeter-settings lightdm-gtk-greeter tango-icon-theme numix-gtk-theme fonts-cantarell
 
 echo "[!] Create tools directory (and subdirectories)"
 cd $mydirectory/
