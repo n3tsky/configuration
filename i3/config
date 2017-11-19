@@ -1,0 +1,254 @@
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below. ISO 10646 = Unicode
+font -misc-fixed-medium-r-normal--15-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, if you need a lot of unicode glyphs or
+# right-to-left text rendering, you should instead use pango for rendering and
+# chose a FreeType font, such as:
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+m focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+m move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h;exec notify-send 'tile horizontally'
+
+# split in vertical orientation
+bindsym $mod+v split v;exec notify-send 'tile vertically'
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+ampersand workspace 1
+bindsym $mod+eacute workspace 2
+bindsym $mod+quotedbl workspace 3
+bindsym $mod+apostrophe workspace 4
+bindsym $mod+parenleft workspace 5
+bindsym $mod+minus workspace 6
+bindsym $mod+egrave workspace 7
+bindsym $mod+underscore workspace 8
+bindsym $mod+ccedilla workspace 9
+bindsym $mod+agrave workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+ampersand move container to workspace 1
+bindsym $mod+Shift+eacute move container to workspace 2
+bindsym $mod+Shift+quotedbl move container to workspace 3
+bindsym $mod+Shift+apostrophe move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+minus move container to workspace 6
+bindsym $mod+Shift+egrave move container to workspace 7
+bindsym $mod+Shift+underscore move container to workspace 8
+bindsym $mod+Shift+ccedilla move container to workspace 9
+bindsym $mod+Shift+agrave move container to workspace 10
+
+# navigate workspaces
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym m resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id sudo /sbin/shutdown -r now, mode "default"
+    bindsym Shift+s exec --no-startup-id sudo /sbin/shutdown -h -P now, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        position top
+	#status_command i3status
+	# please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+	#tray_output primary
+	#tray_output eDP1
+	tray_output primary
+	# font
+	font pango:Cantarell,Icons 10
+
+	status_command i3status -c ~/.i3/i3status.conf
+	#colors {
+	#	background #232323
+	#	statusline #DCDCDC
+	#}
+	
+	# Colors
+	colors {
+                background #2B2C2B
+                statusline #F9FAF9
+                separator  #454947
+		
+		#                  border  backgr. text
+                focused_workspace  #F9FAF9 #16A085 #2B2C2B
+                active_workspace   #595B5B #353836 #FDF6E3
+                inactive_workspace #595B5B #353836 #EEE8D5
+                urgent_workspace   #16A085 #FDF6E3 #E5201D
+        }
+}
+
+# Theme colors
+# class                 border  backgr. text    indic.  child_border
+client.focused          #808280 #808280 #80FFF9 #FDF6E3
+client.focused_inactive #434745 #434745 #16A085 #454948
+client.unfocused        #434745 #434745 #16A085 #454948
+client.urgent           #CB4B16 #FDF6E3 #16A085 #268BD2
+client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+client.background       #2B2C2B
+
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run -i -p 'Menu' -fn 'Ubuntu Mono-28'
+bindsym $mod+d exec --no-startup-id dmenu_run -i -p 'Menu' -fn '-*-fixed-*-*-*-*-20-200-*-*-*-*-*-*' -nb '#191919' -nf '#9ac0cd' -sb '#191919' -sf '#bf3f34'
+#bindsym $mod+Shift+d exec --no-startup-id morc_menu
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+#### Custom ###
+bindsym $mod+Ctrl+t exec i3-sensible-terminal
+bindsym $mod+Ctrl+f exec firefox
+bindsym $mod+Ctrl+Shift+p exec firefox -P "pentest" -no-remote
+bindsym $mod+Ctrl+w exec wireshark
+bindsym $mod+Ctrl+v exec virtualbox
+bindsym $mod+Ctrl+b exec burp
+bindsym $mod+Ctrl+n exec thunar
+bindsym $mod+Ctrl+g exec gedit 
+bindsym $mod+Ctrl+p exec pidgin 
+bindsym $mod+Ctrl+c exec truecrypt 
+bindsym $mod+Ctrl+k exec /usr/local/bin/keepassx
+bindsym $mod+Ctrl+r exec xterm -e ranger 
+
+# take screenshot
+bindsym $mod+Ctrl+s exec sleep 1 && xfce4-screenshooter -r
+
+# Lock i3
+bindsym $mod+Ctrl+l exec "~/.i3/locker"
+
+# Scratchpad
+bindsym $mod+Shift+plus move scratchpad
+bindsym $mod+plus scratchpad show
+
+# Handle sound card
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 2%+
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 2%-
+
+# Disable focus on mouse
+focus_follows_mouse no
+
+# Scale multiple outputs
+exec --no-startup-id sleep 1 && feh --bg-fill /path/to/image.png
+# nitrogen?
+
+# Exec on startup
+exec --no-startup-id xautolock -time 3 -locker "~/.i3/locker" &
+exec --no-startup-id redshift-gtk -l 0:0 -t 5100:5100
+exec --no-startup-id nm-applet
+
+# Music
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+
+# Light
+# xbacklight -inc 10; notify-send 'brightness-up'
+# xbacklight -dec 10; notify-send 'brightness-down'
+
+# Get rid of borders
+for_window [title="fish"] border none
+for_window [title="TrueCrypt"] floating enable 
+for_window [title="Write: "] floating enable 
+for_window [title="Calculator"] floating enable
+for_window [title="KeePassX"] floating enable 
+for_window [title="Open Database"] floating enable
+for_window [title="Add Entry"] floating enable 
+for_window [title="Edit Entry"] floating enable
+for_window [title="Lightdm-gtk-greeter-settings"] floating enable
+
+for_window [title="alsamixer"] floating enable border pixel 1
