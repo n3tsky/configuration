@@ -1,0 +1,26 @@
+#!/bin/bash
+
+OPTIONS="Power-off system\nReboot system\nSuspend system\nHibernate system"
+LAUNCHER="/usr/bin/rofi -width 30 -dmenu -i -config /home/MYUSER/.config/i3/rofi-power.conf -p Power-Management:"
+
+option=$(echo -e $OPTIONS | $LAUNCHER | awk '{print $1}' | tr -d '\r\n')
+
+if [ ${#option} -gt 0 ]
+then
+    case $option in
+      Reboot)
+        /bin/systemctl reboot
+        ;;
+      Power-off)
+        /bin/systemctl poweroff
+        ;;
+      Suspend)
+        $($USE_LOCKER) && "$LOCKER"; /bin/systemctl suspend
+        ;;
+      Hibernate)
+        $($USE_LOCKER) && "$LOCKER"; /bin/systemctl hibernate
+        ;;
+      *)
+        ;;
+    esac
+fi
