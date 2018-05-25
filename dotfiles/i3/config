@@ -151,6 +151,10 @@ bindsym $mod+r mode "resize"
 #### Custom
 # Programs
 bindsym $mod+Ctrl+f exec /usr/bin/firefox
+bindsym $mod+Ctrl+Shift+p exec /usr/bin/firefox -P "pentest" -no-remote
+bindsym $mod+Ctrl+w exec /usr/bin/wireshark
+bindsym $mod+Ctrl+b exec burp
+bindsym $mod+Ctrl+c exec veracrypt
 bindsym $mod+Ctrl+k exec /usr/bin/keepassx
 bindsym $mod+Ctrl+s exec /usr/bin/xfce4-screenshooter
 bindsym $mod+Ctrl+l exec /usr/local/bin/i3lockblur
