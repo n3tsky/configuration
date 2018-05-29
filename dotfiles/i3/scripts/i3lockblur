@@ -1,6 +1,13 @@
 #!/bin/bash
 
-/usr/bin/scrot /tmp/screenshot.png
-/usr/bin/convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
-/usr/bin/i3lock -i /tmp/screenshotblur.png
-/bin/rm /tmp/screenshot.png /tmp/screenshotblur.png
+BLUR=false
+WALLPAPER="/home/MYUSER/Pictures/Wallpapers/wallpaper.png"
+
+if [ "$BLUR" = true ]; then 
+	/usr/bin/scrot /tmp/screenshot.png
+	/usr/bin/convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
+	/usr/bin/i3lock -i /tmp/screenshotblur.png
+	/bin/rm /tmp/screenshot.png /tmp/screenshotblur.png
+else
+	/usr/bin/i3lock -i "$WALLPAPER" -e -f 
+fi
