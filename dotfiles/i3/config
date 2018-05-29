@@ -204,4 +204,4 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-bindsym $mod+d exec /usr/bin/rofi -show run -config /home/MYUSER/.config/rofi.conf
+bindsym $mod+d exec /usr/bin/rofi -show run -config /home/MYUSER/.config/rofi.conf -lines 15
