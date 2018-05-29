@@ -1,13 +1,17 @@
 #!/bin/bash
 
-OPTIONS="Power-off system\nReboot system\nSuspend system\nHibernate system"
-LAUNCHER="/usr/bin/rofi -width 30 -dmenu -i -config /home/MYUSER/.config/i3/rofi-power.conf -p Power-Management:"
+OPTIONS="Logoff\nPower-off system\nReboot system\nSuspend system\nHibernate system"
+LAUNCHER="/usr/bin/rofi -width 30 -dmenu -i -config /home/MYUSER/.config/i3/rofi/rofi-power.conf -p Power-Management"
+LOCKER="/usr/local/bin/i3lockblur"
 
 option=$(echo -e $OPTIONS | $LAUNCHER | awk '{print $1}' | tr -d '\r\n')
 
 if [ ${#option} -gt 0 ]
 then
     case $option in
+      Logoff)
+	/usr/bin/i3-msg exit
+	;;
       Reboot)
         /bin/systemctl reboot
         ;;
@@ -15,10 +19,10 @@ then
         /bin/systemctl poweroff
         ;;
       Suspend)
-        $($USE_LOCKER) && "$LOCKER"; /bin/systemctl suspend
+        "$LOCKER"; /bin/systemctl suspend
         ;;
       Hibernate)
-        $($USE_LOCKER) && "$LOCKER"; /bin/systemctl hibernate
+        "$LOCKER"; /bin/systemctl hibernate
         ;;
       *)
         ;;
