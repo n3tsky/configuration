@@ -120,12 +120,11 @@ bindsym $mod+Shift+agrave move container to workspace 10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec /home/MYUSER/.config/i3/rofi-power
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
+
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -148,28 +147,41 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#### Custom
-# Programs
-bindsym $mod+Ctrl+f exec /usr/bin/firefox
-bindsym $mod+Ctrl+Shift+p exec /usr/bin/firefox -P "pentest" -no-remote
-bindsym $mod+Ctrl+w exec /usr/bin/wireshark
-bindsym $mod+Ctrl+b exec burp
-bindsym $mod+Ctrl+c exec veracrypt
-bindsym $mod+Ctrl+k exec /usr/bin/keepassx
-bindsym $mod+Ctrl+s exec /usr/bin/xfce4-screenshooter
-bindsym $mod+Ctrl+l exec /usr/local/bin/i3lockblur
-bindsym $mod+Ctrl+v exec /usr/bin/virtualbox
-bindsym $mod+Ctrl+n exec /usr/bin/nautilus
+################
+#### Custom ####
+################
 
-# Boot-up
-exec --no-startup-id /usr/bin/xautolock -time 10 -locker /usr/local/bin/i3lockblur &
-exec --no-startup-id /usr/bin/redshift-gtk
-exec --no-startup-id /usr/bin/volumeicon
-exec --no-startup-id /usr/bin/compton -f
+### Binding
+bindsym $mod+Ctrl+f exec /usr/bin/firefox
+bindsym $mod+Ctrl+g exec /usr/bin/gedit
+bindsym $mod+Ctrl+k exec /usr/bin/keepassx
+bindsym $mod+Ctrl+l exec /usr/local/bin/i3lockblur
+bindsym $mod+Ctrl+n exec /usr/bin/nautilus
+bindsym $mod+Ctrl+s exec /usr/bin/xfce4-screenshooter
+bindsym $mod+Ctrl+t exec /usr/bin/veracrypt
+bindsym $mod+Ctrl+v exec /usr/bin/virtualbox 
+bindsym $mod+Ctrl+w exec /usr/bin/wireshark
 
 # Scratchpad
 bindsym $mod+Shift+plus move scratchpad
 bindsym $mod+plus scratchpad show
+
+# Handle sound card
+bindsym XF86AudioMute exec "/usr/bin/pactl set-sink-mute 0 toggle"
+bindsym XF86AudioRaiseVolume exec "/usr/bin/pactl set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume exec "/usr/bin/pactl set-sink-volume 0 -5%"
+
+#### Boot-up
+# Keyring daemon
+#exec /usr/bin/gnome-keyring-daemon --start --components=gpg,secrets,ssh,pkcs11
+# Wallpaper
+exec --no-startup-id feh --bg-fill /home/MYUSER/Pictures/Wallpapers/wallpaper.png
+exec --no-startup-id /usr/bin/xautolock -time 3 -locker /usr/local/bin/i3lockblur & 
+exec --no-startup-id /usr/bin/redshift-gtk -l 0:0 -t 5100:5100 -m randr
+exec --no-startup-id /usr/bin/volumeicon
+exec --no-startup-id /usr/bin/dunst
+exec --no-startup-id /usr/bin/compton -f
+exec --no-startup-id /usr/bin/nm-applet
 
 # Mouse
 focus_follows_mouse no
@@ -177,19 +189,21 @@ focus_follows_mouse no
 # Borders
 for_window [title="KeePassX"] floating enable
 for_window [title="Volume Control"] floating enable
-for_window [title="Spotify"] floating enable border pixel 0
+for_window [title="/bin/bash"] border pixel 0
+for_window [title=".*Mozilla Firefox"] border pixel 0
 
 # Bar
 bar {
-        tray_output HDMI-0
+        tray_output HDMI-0 
         font pango:Cantarell, FontAwesome 10 #Icons 10
         status_command i3blocks -c /home/MYUSER/.config/i3/i3blocks.conf
-        position top
+	position top
+        #font pango:Cantarell,Icons 10
         colors {
                 background #2B2C2B
                 statusline #F9FAF9
                 separator  #454947
-		            #border  backgr. text
+		#                  border  backgr. text
                 focused_workspace  #F9FAF9 #16A085 #2B2C2B
                 active_workspace   #595B5B #353836 #FDF6E3
                 inactive_workspace #595B5B #353836 #EEE8D5
@@ -204,4 +218,8 @@ set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-bindsym $mod+d exec /usr/bin/rofi -show run -config /home/MYUSER/.config/rofi.conf -lines 15
+#### DMenu and Rofi
+# DMenu
+bindsym $mod+d exec /usr/bin/rofi -show run -config /home/MYUSER/.config/i3/rofi/rofi.conf -lines 15
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec /home/MYUSER/.config/i3/rofi/rofi-power 
