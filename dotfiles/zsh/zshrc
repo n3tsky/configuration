@@ -1,0 +1,53 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle :compinstall filename '/home/MYUSER/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=0
+setopt autocd
+unsetopt extendedglob nomatch
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+### Custom
+# Define shortcut keys: [esc] [esc]
+su-command-line(){
+	LBUFFER="su - MYSUPERUSER"
+}
+zle -N su-command-line
+bindkey "\e\e" su-command-line
+
+export EDITOR=/usr/bin/vim
+
+# Define bash prompt (PS1)
+PS1="%{%F{red}%}[%D{%a %d %b - %H:%M}]%{%f%} %{%F{blue}%}%n%{%f%}%{%F{green}%}@%M%{%f%}:%~
+➜ "
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
